@@ -4,11 +4,11 @@ include src/Makefile.mk
 # get platform settings
 include platform/$(MCU).mk
 
-INCLUDES +=
+INCLUDES += -Iplatform
 ALIBS +=
 RLIBS +=
 DLIBS +=
-ALIBDIR +=
+ALIBDIR += -L"./ld"
 RLIBDIR +=
 DLIBDIR +=
 
@@ -99,11 +99,17 @@ clean: pre-clean
 	$(RM) -r bin
 
 # Main rule
-all: $(BIN_PATH)/$(BIN_NAME).a
+all: $(BIN_PATH)/$(BIN_NAME).elf
 
 # create the executable
-$(BIN_PATH)/$(BIN_NAME).a: $(OBJECTS)
-	$(CXX_PREFIX)$(AR) -r $@ $(OBJECTS)
+$(BIN_PATH)/$(BIN_NAME).elf: $(OBJECTS)
+	$(TOOLCHAIN_PREFIX)$(CXX_COMPILER) $(LDFLAGS) $(OBJECTS) -Xlinker -Map="$@.map" -o $@ $(LIBS)
+	# dump size and log to file
+	$(TOOLCHAIN_PREFIX)$(SIZE) -x --format=SysV $@ 
+	date >> size$(BUILD_TARGET).log
+	$(TOOLCHAIN_PREFIX)$(SIZE) $@ >> size$(BUILD_TARGET).log
+	# create the various output files
+	$(TOOLCHAIN_PREFIX)$(OBJCOPY) -R .stack -O binary $@ $(BIN_PATH)/$(BIN_NAME).bin
 	$(TOOLCHAIN_PREFIX)$(OBJDUMP) -h -S "$@" > "$(BIN_PATH)/$(BIN_NAME).lss"
 
 # Add dependency files, if they exist
