@@ -63,10 +63,10 @@ debug: export LDFLAGS := $(LINK_FLAGS) $(LINK_FLAGS_DEBUG) $(ALIBDIR) $(DLIBDIR)
 debug: export LIBS := $(ALIBS) $(DLIBS)
 
 # Build and output paths
-release: export BUILD_PATH := build/release
-release: export BIN_PATH := bin/release
-debug: export BUILD_PATH := build/debug
-debug: export BIN_PATH := bin/debug
+release: export BUILD_PATH := build/$(MCU)/release
+release: export BIN_PATH := bin/$(MCU)/release
+debug: export BUILD_PATH := build/$(MCU)/debug
+debug: export BIN_PATH := bin/$(MCU)/debug
 
 # export what target we are building, used for size logs
 release: export BUILD_TARGET := release
