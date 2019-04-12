@@ -81,11 +81,11 @@ OBJECTS += $(S_SOURCES:%.s=$(BUILD_PATH)/%.s.o)
 DEPS = $(OBJECTS:.o=.d)
 
 # Standard, non-optimized release build
-release: dirs pre-release
+release: dirs
 	$(MAKE) all --no-print-directory
 
 # Debug build for gdb debugging
-debug: dirs pre-debug
+debug: dirs
 	$(MAKE) all --no-print-directory
 
 # Create the directories used in the build
@@ -94,7 +94,7 @@ dirs:
 	$(MKDIR) -p $(BIN_PATH)
 
 # Removes all build files
-clean: pre-clean
+clean:
 	$(RM) -r build
 	$(RM) -r bin
 

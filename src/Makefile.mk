@@ -1,15 +1,11 @@
 # update per change V0006
 
 # project name
-BIN_NAME = template_microcontroller
-BOARD = dummy_board
-
-#include board specific settings/rules
-include src/$(BOARD).mk
+BIN_NAME = Cortex_M_startup_$(MCU)
 
 # project settings
 C_SOURCES +=
-CXX_SOURCES += src/startup.cpp src/main.cpp
+CXX_SOURCES += src/startup.cpp
 S_SOURCES +=
 INCLUDES += -Iinc
 DEFINES +=
