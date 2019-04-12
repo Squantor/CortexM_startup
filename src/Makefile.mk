@@ -1,7 +1,7 @@
 # update per change V0006
 
 # project name
-BIN_NAME = Cortex_M_startup_$(MCU)
+BIN_NAME = libCortex_M_startup_$(MCU)
 
 # project settings
 C_SOURCES +=

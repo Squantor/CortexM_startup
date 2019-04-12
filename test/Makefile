@@ -1,14 +1,12 @@
 # update per change V0008
 # get project settings
 include src/Makefile.mk
-# get platform settings
-include platform/$(MCU).mk
 
-INCLUDES += -Iplatform
+INCLUDES +=
 ALIBS +=
 RLIBS +=
 DLIBS +=
-ALIBDIR += -L"./ld"
+ALIBDIR +=
 RLIBDIR +=
 DLIBDIR +=
 

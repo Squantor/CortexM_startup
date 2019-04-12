@@ -6,19 +6,24 @@ CXX_SOURCES += src/$(BOARD).cpp
 S_SOURCES +=
 DEFINES += -D$(BOARD)
 INCLUDES += -Iinc
-ALIBS +=
+ALIBS += -lCortex_M_startup_$(MCU)
 RLIBS +=
 DLIBS +=
 ALIBDIR +=
-RLIBDIR +=
-DLIBDIR +=
+RLIBDIR += -L"../bin/$(MCU)/release"
+DLIBDIR += -L"../bin/$(MCU)/debug"
+
+TOOLCHAIN_PREFIX = arm-none-eabi-
 
 #custom build rules
 pre-clean:
+	$(MAKE) -C .. clean MCU=$(MCU)
 
 pre-release:
+	$(MAKE) -C .. release MCU=$(MCU)
 
 pre-debug:
+	$(MAKE) -C .. debug MCU=$(MCU)
 
 #project hardware specific commands
 gdbusbdebug: debug

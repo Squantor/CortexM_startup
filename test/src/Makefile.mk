@@ -9,17 +9,18 @@ include src/$(BOARD).mk
 
 # project settings
 C_SOURCES +=
-CXX_SOURCES += src/startup.cpp src/main.cpp
+CXX_SOURCES += src/main.cpp
 S_SOURCES +=
 INCLUDES += -Iinc
 DEFINES +=
 ALIBS +=
 RLIBS +=
 DLIBS +=
-ALIBDIR +=
-RLIBDIR +=
-DLIBDIR +=
+ALIBDIR +=  -L"../ld"
+RLIBDIR += -L"../bin/$(MCU)/release"
+DLIBDIR += -L"../bin/$(MCU)/debug"
 COMPILE_C_FLAGS = -std=gnu11 -Wall -Wextra -Wno-main -fno-common -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections
 COMPILE_CXX_FLAGS = -std=c++17 -Wall -Wextra -Wno-main -fno-common -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -fno-rtti -fno-exceptions
 COMPILE_ASM_FLAGS = -c -x assembler-with-cpp
 LINK_FLAGS +=  -nostdlib -Wl,--gc-sections -Wl,-print-memory-usage
+LDSCRIPT = -T"../ld/$(MCU).ld"
