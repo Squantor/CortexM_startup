@@ -16,11 +16,10 @@ DEFINES +=
 ALIBS +=
 RLIBS +=
 DLIBS +=
-ALIBDIR +=  -L"../ld"
-RLIBDIR += -L"../bin/$(MCU)/release"
-DLIBDIR += -L"../bin/$(MCU)/debug"
+ALIBDIR +=
+RLIBDIR +=
+DLIBDIR +=
 COMPILE_C_FLAGS = -std=gnu11 -Wall -Wextra -Wno-main -fno-common -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections
 COMPILE_CXX_FLAGS = -std=c++17 -Wall -Wextra -Wno-main -fno-common -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -fno-rtti -fno-exceptions
 COMPILE_ASM_FLAGS = -c -x assembler-with-cpp
 LINK_FLAGS +=  -nostdlib -Wl,--gc-sections -Wl,-print-memory-usage
-LDSCRIPT = -T"../ld/$(MCU).ld"

@@ -1,6 +1,6 @@
 # update per change V0002
 # board specific settings
-MCU = LPC812
+MCU = CortexM0_LPC
 C_SOURCES +=
 CXX_SOURCES += src/$(BOARD).cpp
 S_SOURCES +=
@@ -9,11 +9,12 @@ INCLUDES += -Iinc
 ALIBS += -lCortex_M_startup_$(MCU)
 RLIBS +=
 DLIBS +=
-ALIBDIR +=
+ALIBDIR += -L"../ld"
 RLIBDIR += -L"../bin/$(MCU)/release"
 DLIBDIR += -L"../bin/$(MCU)/debug"
 
 TOOLCHAIN_PREFIX = arm-none-eabi-
+LDSCRIPT = -T"../ld/$(MCU).ld"
 
 #custom build rules
 pre-clean:
